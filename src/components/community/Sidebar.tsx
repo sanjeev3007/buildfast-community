@@ -1,8 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SearchIcon, XIcon } from './Icons';
 import { PLATFORMS } from '@/types/community.types';
+import EventCard from '../events/EventCard';
+import { getUpcomingEvents } from '@/actions/events.actions';
+import type { Event } from '@/types/events.types';
 
 const SEARCH_ID = 'sidebar-index-search';
 
@@ -23,10 +26,26 @@ const Sidebar: React.FC<SidebarProps> = ({
   searchQuery,
   onSearchChange,
 }) => {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    getUpcomingEvents(5).then((res) => {
+      if (!cancelled && res.success && res.data) {
+        setEvents(res.data);
+      }
+      if (!cancelled) setIsLoading(false);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <aside
       className={`
-        fixed inset-y-0 left-0 z-50 flex w-56 flex-col border-r border-neutral-800 bg-black/80    px-4 py-6 transition-transform duration-300 ease-out md:sticky md:top-16 md:h-[calc(100vh-4rem)] md:w-52 md:px-4 md:py-6
+        fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-neutral-800 bg-black/80    px-4 py-6 transition-transform duration-300 ease-out md:sticky md:top-16 md:h-[calc(100vh-4rem)] md:w-72 md:px-4 md:py-6
         ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
       `}
       aria-label="Filter parameters"
@@ -103,6 +122,31 @@ const Sidebar: React.FC<SidebarProps> = ({
           </div>
         </div>
 
+        <div className="flex flex-col gap-3">
+          <h3 className="text-[0.625rem] font-extrabold uppercase tracking-[0.4em] text-neutral-500">
+            Upcoming Events
+          </h3>
+          {isLoading ? (
+            <div className="flex flex-col gap-3">
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="h-24 animate-pulse rounded-lg border border-neutral-800 bg-neutral-900/50"
+                />
+              ))}
+            </div>
+          ) : events.length > 0 ? (
+            <div className="flex flex-col gap-3">
+              {events.map((event) => (
+                <EventCard key={event.id} event={event} />
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 text-center">
+              <p className="text-xs text-neutral-500">No upcoming events</p>
+            </div>
+          )}
+        </div>
       </div>
     </aside>
   );

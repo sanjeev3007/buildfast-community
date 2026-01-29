@@ -33,7 +33,7 @@ export function normalizePlatformForFilter(p: string): string {
 }
 
 /** Allowed post_type values; must match DB constraint community_posts_post_type_check */
-export const COMMUNITY_POST_TYPES = ['linkedin', 'instagram', 'twitter', 'x'] as const;
+export const COMMUNITY_POST_TYPES = ['linkedin', 'instagram', 'twitter', 'x', 'blog'] as const;
 
 export type CommunityPostType = (typeof COMMUNITY_POST_TYPES)[number];
 

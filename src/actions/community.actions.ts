@@ -16,7 +16,7 @@ import {
 function isCommunityPostType(value: unknown): value is CommunityPostType {
   return (
     typeof value === "string" &&
-    (['linkedin', 'instagram', 'twitter', 'x'] as const).includes(value as CommunityPostType)
+    (['linkedin', 'instagram', 'twitter', 'x', 'blog'] as const).includes(value as CommunityPostType)
   );
 }
 

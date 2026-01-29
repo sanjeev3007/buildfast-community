@@ -1,15 +1,22 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Calendar, Eye } from 'lucide-react';
+import { Calendar, Eye, Heart, MessageCircle } from 'lucide-react';
 import type { TextPost } from '@/types/text-posts.types';
+import { getPostCounts } from '@/actions/likes-comments.actions';
 
 interface TextPostCardProps {
   post: TextPost;
 }
 
 export default function TextPostCard({ post }: TextPostCardProps) {
+  const [counts, setCounts] = useState<{ likeCount: number; commentCount: number } | null>(null);
+
+  useEffect(() => {
+    getPostCounts(post.id).then(setCounts).catch(() => setCounts({ likeCount: 0, commentCount: 0 }));
+  }, [post.id]);
+
   const dateStr = new Date(post.publishedAt).toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
@@ -20,7 +27,7 @@ export default function TextPostCard({ post }: TextPostCardProps) {
     <article className="group border-b border-neutral-800 bg-black pb-12 transition-colors last:border-b-0">
       <div className="flex flex-col gap-6">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap">
             <span className="flex items-center gap-2 text-[0.625rem] font-extrabold uppercase tracking-[0.3em] text-neutral-500">
               <span className="h-1.5 w-1.5 rounded-full bg-neutral-500" />
               Blog Post
@@ -38,6 +45,21 @@ export default function TextPostCard({ post }: TextPostCardProps) {
                 <div className="flex items-center gap-1.5 text-[0.625rem] font-medium text-neutral-600">
                   <Eye className="h-3 w-3" />
                   <span>{post.views}</span>
+                </div>
+              </>
+            )}
+            {counts !== null && (
+              <>
+                <span className="h-1 w-1 rounded-full bg-neutral-800" aria-hidden />
+                <div className="flex items-center gap-3 text-[0.625rem] font-medium text-neutral-600">
+                  <span className="flex items-center gap-1.5" title={`${counts.likeCount} like${counts.likeCount !== 1 ? 's' : ''}`}>
+                    <Heart className="h-3 w-3" aria-hidden />
+                    {counts.likeCount}
+                  </span>
+                  <span className="flex items-center gap-1.5" title={`${counts.commentCount} comment${counts.commentCount !== 1 ? 's' : ''}`}>
+                    <MessageCircle className="h-3 w-3" aria-hidden />
+                    {counts.commentCount}
+                  </span>
                 </div>
               </>
             )}
