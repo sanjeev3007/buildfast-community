@@ -26,12 +26,12 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <aside
       className={`
-        fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-neutral-800 bg-black p-8 transition-transform duration-300 ease-out md:sticky md:top-16 md:h-[calc(100vh-4rem)]
+        fixed inset-y-0 left-0 z-50 flex w-56 flex-col border-r border-neutral-800 bg-black/80    px-4 py-6 transition-transform duration-300 ease-out md:sticky md:top-16 md:h-[calc(100vh-4rem)] md:w-52 md:px-4 md:py-6
         ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
       `}
       aria-label="Filter parameters"
     >
-      <div className="mb-12 flex items-center justify-between md:hidden">
+      <div className="mb-8  flex items-center justify-between md:hidden">
         <span className="block text-[0.625rem] font-extrabold uppercase tracking-[0.4em] text-white">Parameters</span>
         <button
           type="button"
@@ -43,8 +43,8 @@ const Sidebar: React.FC<SidebarProps> = ({
         </button>
       </div>
 
-      <div className="flex flex-col gap-16">
-        <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-3">
           <label htmlFor={SEARCH_ID} className="block text-[0.625rem] font-extrabold uppercase tracking-[0.4em] text-neutral-500">
             Index Search
           </label>
@@ -56,10 +56,10 @@ const Sidebar: React.FC<SidebarProps> = ({
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
               aria-label="Search posts by keywords"
-              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black w-full rounded-none border-b border-neutral-800 bg-transparent py-3 pl-8 pr-2 text-xs text-white placeholder:text-neutral-800 transition-colors focus:border-neutral-500"
+              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black w-full rounded-none border-b border-neutral-800 bg-transparent py-2.5 pl-7 pr-1 text-xs text-white placeholder:text-neutral-600 transition-colors focus:border-neutral-500"
             />
             <span
-              className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-neutral-700 transition-colors group-focus-within:text-white"
+              className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-neutral-600 transition-colors group-focus-within:text-white"
               aria-hidden
             >
               <SearchIcon />
@@ -67,10 +67,10 @@ const Sidebar: React.FC<SidebarProps> = ({
           </div>
         </div>
 
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-3">
           <span className="block text-[0.625rem] font-extrabold uppercase tracking-[0.4em] text-neutral-500">Source</span>
           <div
-            className="flex flex-wrap gap-2"
+            className="flex flex-wrap gap-1.5"
             role="group"
             aria-label="Platform filters"
           >
@@ -88,7 +88,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   aria-selected={isSelected}
                   onClick={() => onPlatformChange(value)}
                   className={`
-                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-md border px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider transition-all duration-200
+                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider transition-all duration-200
                     ${
                       isSelected
                         ? 'border-white bg-white text-black'

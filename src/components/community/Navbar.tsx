@@ -7,7 +7,7 @@ import { MenuIcon } from './Icons';
 import JoinCommunityDialog from './JoinCommunityDialog';
 
 interface NavbarProps {
-  onToggleSidebar: () => void;
+  onToggleSidebar?: () => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
@@ -18,14 +18,16 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
   return (
     <nav className="sticky top-0 z-50 flex h-16 w-full items-center justify-between border-b border-neutral-800 bg-black px-6 md:px-12" aria-label="Main navigation">
       <div className="flex items-center gap-6">
-        <button
-          type="button"
-          onClick={onToggleSidebar}
-          aria-label="Open filter menu"
-          className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black md:hidden -ml-1 rounded p-2.5 text-neutral-400 transition-colors hover:text-white"
-        >
-          <MenuIcon />
-        </button>
+        {onToggleSidebar && (
+          <button
+            type="button"
+            onClick={onToggleSidebar}
+            aria-label="Open filter menu"
+            className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black md:hidden -ml-1 rounded p-2.5 text-neutral-400 transition-colors hover:text-white"
+          >
+            <MenuIcon />
+          </button>
+        )}
         <Link
           href="/community"
           className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black flex items-center rounded text-sm font-black tracking-[0.3em] transition-opacity hover:opacity-90"

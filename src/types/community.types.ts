@@ -37,13 +37,6 @@ export const COMMUNITY_POST_TYPES = ['linkedin', 'instagram', 'twitter', 'x'] as
 
 export type CommunityPostType = (typeof COMMUNITY_POST_TYPES)[number];
 
-// -----------------------------------------------------------------------------
-// Database Table Names
-// -----------------------------------------------------------------------------
-
-/** Supabase table name for community posts */
-export const COMMUNITY_POSTS_TABLE = 'community_posts';
-
 /** Raw row shape from Supabase table `community_posts` */
 export interface CommunityPostRow {
   id: number;
@@ -74,6 +67,7 @@ export interface SocialPost {
   likes?: number;
   comments?: number;
   externalUrl: string;
+  type: 'social'; // Discriminator
 }
 
 // -----------------------------------------------------------------------------
@@ -106,6 +100,22 @@ export interface JoinCommunityError {
 }
 
 export type JoinCommunityResponse = JoinCommunitySuccess | JoinCommunityError;
+
+// -----------------------------------------------------------------------------
+// Unified Post Types (for mixed feed)
+// -----------------------------------------------------------------------------
+
+/** Union type for all post types in the community feed */
+export type CommunityPost = SocialPost | {
+  id: number;
+  title: string;
+  excerpt: string;
+  content: string;
+  imageUrl?: string;
+  publishedAt: string;
+  views: number;
+  type: 'text'; // Discriminator
+};
 
 // -----------------------------------------------------------------------------
 // Other Community Types

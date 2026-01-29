@@ -35,6 +35,7 @@ function mapRowToSocialPost(row: CommunityPostRow): SocialPost {
     tags: [],
     publishedAt: row.created_at,
     externalUrl: row.link,
+    type: 'social', // Discriminator
   };
 }
 
