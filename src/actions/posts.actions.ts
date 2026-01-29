@@ -23,9 +23,10 @@ export async function getAllPosts(): Promise<UnifiedPost[]> {
     ]);
 
     const socialPosts: SocialPost[] = socialPostsResult || [];
-    const textPosts: TextPost[] = textPostsResult.success && textPostsResult.data 
-      ? textPostsResult.data.map(post => ({ ...post, type: 'text' as const }))
-      : [];
+    const textPosts: (TextPost & { type: 'text' })[] =
+      textPostsResult.success && textPostsResult.data
+        ? textPostsResult.data.map((post) => ({ ...post, type: 'text' as const }))
+        : [];
 
     // Merge and sort by publishedAt descending
     const allPosts: UnifiedPost[] = [...socialPosts, ...textPosts];

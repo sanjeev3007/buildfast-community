@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function AuthCallbackClosePage() {
+function AuthCallbackCloseContent() {
   const searchParams = useSearchParams();
   const error = searchParams.get('error');
 
@@ -23,5 +23,19 @@ export default function AuthCallbackClosePage() {
     <div className="flex min-h-screen items-center justify-center bg-neutral-950 text-white">
       <p className="text-neutral-400">Sign-in complete. Closing…</p>
     </div>
+  );
+}
+
+export default function AuthCallbackClosePage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-neutral-950 text-white">
+          <p className="text-neutral-400">Sign-in complete. Closing…</p>
+        </div>
+      }
+    >
+      <AuthCallbackCloseContent />
+    </Suspense>
   );
 }
