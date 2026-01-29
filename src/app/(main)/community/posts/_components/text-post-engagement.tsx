@@ -137,7 +137,9 @@ export default function TextPostEngagement({ textPostId }: { textPostId: number 
           </button>
         </LoginDialog>
       </div>
-      <p className="text-xs text-neutral-500">Sign in with Google to comment.</p>
+      {!user && (
+        <p className="text-xs text-neutral-500">Sign in with Google to comment.</p>
+      )}
 
       <div className="min-h-[120px] space-y-4 max-h-[60vh] overflow-y-auto">
         {commentsLoading ? (

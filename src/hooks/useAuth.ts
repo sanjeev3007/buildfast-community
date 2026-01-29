@@ -38,11 +38,14 @@ export function useAuth() {
         reject(new Error('Popup blocked'));
         return;
       }
-      const onMessage = (e: MessageEvent) => {
+      const onMessage = async (e: MessageEvent) => {
         if (e.origin !== window.location.origin) return;
         if (e.data?.type === 'AUTH_SUCCESS') {
           window.removeEventListener('message', onMessage);
           clearInterval(interval);
+          // Refresh session in opener so UI updates without page reload
+          const { data: { session } } = await supabase.auth.getSession();
+          setUser(session?.user ?? null);
           resolve();
         }
         if (e.data?.type === 'AUTH_ERROR') {
@@ -60,7 +63,7 @@ export function useAuth() {
         }
       }, 300);
     });
-  }, []);
+  }, [supabase]);
 
   const signOut = useCallback(async () => {
     await supabase.auth.signOut();

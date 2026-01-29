@@ -8,16 +8,25 @@ import {
 } from "@/types/link-preview.types";
 
 /**
- * Decodes HTML entities in text
+ * Decodes HTML entities in text (e.g. from og:description on blog sites).
+ * Handles named entities and numeric decimal/hex (e.g. &#39; and &#x27; for apostrophe).
  */
 function decodeHtmlEntities(text: string): string {
   if (!text) return text;
-  return text
+  let out = text
     .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">");
+  // Numeric: &#39; (decimal) and &#x27; (hex) for apostrophe, etc.
+  out = out.replace(/&#(\d+);/g, (_, num) =>
+    String.fromCharCode(parseInt(num, 10))
+  );
+  out = out.replace(/&#x([0-9a-f]+);/gi, (_, hex) =>
+    String.fromCharCode(parseInt(hex, 16))
+  );
+  return out;
 }
 
 /**
