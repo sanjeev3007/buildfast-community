@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import PostCard from '@/components/community/PostCard';
-import TextPostCard from '@/components/community/TextPostCard';
+import PostCard from '@/components/community/post-card';
+import TextPostCard from '@/components/community/text-post-card';
 import type { UnifiedPost } from '@/actions/posts.actions';
 
 interface FeedItemProps {

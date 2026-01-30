@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight, Zap, Users, Target, Heart, Mail, MapPin } from 'lucide-react';
-import Navbar from '@/components/community/Navbar';
-import JoinCommunityDialog from '@/components/community/JoinCommunityDialog';
+import Navbar from '@/components/community/navbar';
+import JoinCommunityDialog from '@/components/community/join-community-dialog';
 
 const stats = [
   { value: '10K+', label: 'Community Members' },

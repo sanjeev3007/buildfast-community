@@ -3,8 +3,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { MenuIcon } from './Icons';
-import JoinCommunityDialog from './JoinCommunityDialog';
+import { MenuIcon } from '@/components/community/icons';
+import JoinCommunityDialog from './join-community-dialog';
 import { useAuth } from '@/hooks/useAuth';
 import { User, LogOut } from 'lucide-react';
 

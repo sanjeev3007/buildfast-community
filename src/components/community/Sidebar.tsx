@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { SearchIcon, XIcon } from './Icons';
+import { SearchIcon, XIcon } from '@/components/community/icons';
 import { PLATFORMS } from '@/types/community.types';
-import EventCard from '../events/EventCard';
+import EventCard from '../events/event-card';
 import { getUpcomingEvents } from '@/actions/events.actions';
 import type { Event } from '@/types/events.types';
 

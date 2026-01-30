@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { getUpcomingEvents } from '@/actions/events.actions';
 import type { Event } from '@/types/events.types';
-import EventCard from './EventCard';
+import EventCard from './event-card';
 
 export default function EventsSidebar() {
   const [events, setEvents] = useState<Event[]>([]);

@@ -1,13 +1,13 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import Navbar from '@/components/community/Navbar';
-import Sidebar from '@/components/community/Sidebar';
-import Header from '@/components/community/Header';
-import CommunityFeed from '@/components/community/CommunityFeed';
-import CommunityFooter from '@/components/community/CommunityFooter';
-import SidebarOverlay from '@/components/community/SidebarOverlay';
-import EventsSidebar from '@/components/events/EventsSidebar';
+import Navbar from '@/components/community/navbar';
+import Sidebar from '@/components/community/sidebar';
+import Header from '@/components/community/header';
+import CommunityFeed from '@/components/community/community-feed';
+import CommunityFooter from '@/components/community/community-footer';
+import SidebarOverlay from '@/components/community/sidebar-overlay';
+// import EventsSidebar from '@/components/events/events-sidebar.tsx';
 import { getAllPosts } from '@/actions/posts.actions';
 import type { UnifiedPost } from '@/actions/posts.actions';
 

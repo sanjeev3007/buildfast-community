@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import FeedItem from '@/components/community/FeedItem';
+import FeedItem from '@/components/community/feed-item';
 import type { UnifiedPost } from '@/actions/posts.actions';
 
 interface CommunityFeedProps {

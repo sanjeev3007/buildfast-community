@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { ExternalLinkIcon, PlatformIcon } from './Icons';
+import { ExternalLinkIcon, PlatformIcon } from '@/components/community/icons';
 import type { SocialPost } from '@/types/community.types';
 
 interface PostCardProps {

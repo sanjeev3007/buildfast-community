@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getTextPostBySlug } from '@/actions/text-posts.actions';
-import Navbar from '@/components/community/Navbar';
+import Navbar from '@/components/community/navbar';
 import TextPostDetail from '@/app/(main)/community/posts/_components/text-post-detail';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
